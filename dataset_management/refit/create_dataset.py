@@ -4,8 +4,8 @@ import os
 import re
 import argparse
 
-DATA_DIRECTORY = '../../data/refit/CLEAN_REFIT_081116/'
-SAVE_PATH = 'kettle/'
+DATA_DIRECTORY = r'../../data/refit/CLEAN_REFIT_081116/'
+SAVE_PATH = r'kettle/'
 AGG_MEAN = 522
 AGG_STD = 814
 def get_arguments():
