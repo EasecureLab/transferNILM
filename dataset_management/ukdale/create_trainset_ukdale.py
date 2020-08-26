@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import time
 import argparse
+import os
 import sys
 sys.path.append("../")
 from functions import load_dataframe
@@ -44,6 +45,11 @@ def main():
     validation_percent = 13
     nrows = None
     debug = False
+
+    save_path = args.save_path
+    if not os.path.exists(appliance_name):
+        os.makedirs(appliance_name)
+    save_path = appliance_name + '/'
 
     train = pd.DataFrame(columns=['aggregate', appliance_name])
 
@@ -112,7 +118,7 @@ def main():
 
         if h == params_appliance[appliance_name]['test_build']:
             # Test CSV
-            df_align.to_csv(args.save_path + appliance_name + '_test_.csv', mode='a', index=False, header=False)
+            df_align.to_csv(save_path + appliance_name + '_test_.csv', mode='a', index=False, header=False)
             print("    Size of test set is {:.4f} M rows.".format(len(df_align) / 10 ** 6))
             continue
 
@@ -130,17 +136,17 @@ def main():
     val.reset_index(drop=True, inplace=True)
     train.drop(train.index[-val_len:], inplace=True)
     # Validation CSV
-    val.to_csv(args.save_path + appliance_name + '_validation_' + '.csv', mode='a', index=False, header=False)
+    val.to_csv(save_path + appliance_name + '_validation_' + '.csv', mode='a', index=False, header=False)
 
     # Training CSV
-    train.to_csv(args.save_path + appliance_name + '_training_.csv', mode='a', index=False, header=False)
+    train.to_csv(save_path + appliance_name + '_training_.csv', mode='a', index=False, header=False)
 
     print("    Size of total training set is {:.4f} M rows.".format(len(train) / 10 ** 6))
     print("    Size of total validation set is {:.4f} M rows.".format(len(val) / 10 ** 6))
     del train, val
 
 
-    print("\nPlease find files in: " + args.save_path)
+    print("\nPlease find files in: " + save_path)
     print("Total elapsed time: {:.2f} min.".format((time.time() - start_time) / 60))
 
 
