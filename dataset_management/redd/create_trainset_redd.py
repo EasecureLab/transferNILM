@@ -6,8 +6,8 @@ import argparse
 import os
 
 
-DATA_DIRECTORY = '../../data/refit/REDD/'
-SAVE_PATH = 'kettle/'
+DATA_DIRECTORY = r'../../data/redd/low_freq/'
+SAVE_PATH = r'kettle/'
 AGG_MEAN = 522
 AGG_STD = 814
 def get_arguments():
@@ -40,8 +40,16 @@ def main():
     nrows = None
     debug = False
 
+
+
     appliance_name = args.appliance_name
     print('\n' + appliance_name)
+
+    save_path = args.save_path
+    if not os.path.exists(appliance_name):
+        os.makedirs(appliance_name)
+    save_path = appliance_name + '/'
+
     train = pd.DataFrame(columns=['aggregate', appliance_name])
 
     for h in params_appliance[appliance_name]['houses']:
@@ -156,7 +164,7 @@ def main():
 
         if h == params_appliance[appliance_name]['test_build']:
             # Test CSV
-            df_align.to_csv(args.save_path + appliance_name + '_test_.csv', mode='a', index=False, header=False)
+            df_align.to_csv(save_path + appliance_name + '_test_.csv', mode='a', index=False, header=False)
             print("    Size of test set is {:.4f} M rows.".format(len(df_align) / 10 ** 6))
             continue
 
@@ -169,10 +177,10 @@ def main():
     val = train.tail(val_len)
     val.reset_index(drop=True, inplace=True)
     train.drop(train.index[-val_len:], inplace=True)
-    val.to_csv(args.save_path + appliance_name + '_validation_' + '.csv', mode='a', index=False, header=False)
+    val.to_csv(save_path + appliance_name + '_validation_' + '.csv', mode='a', index=False, header=False)
 
         # Training CSV
-    train.to_csv(args.save_path + appliance_name + '_training_.csv', mode='a', index=False, header=False)
+    train.to_csv(save_path + appliance_name + '_training_.csv', mode='a', index=False, header=False)
 
     print("    Size of total training set is {:.4f} M rows.".format(len(train) / 10 ** 6))
     print("    Size of total validation set is {:.4f} M rows.".format(len(val) / 10 ** 6))
@@ -180,7 +188,7 @@ def main():
 
 
 
-    print("\nPlease find files in: " + args.save_path)
+    print("\nPlease find files in: " + save_path)
     #tot = int(int(time.time() - start_time) / 60)
     print("Total elapsed time: {:.2f} min.".format((time.time() - start_time) / 60))
 

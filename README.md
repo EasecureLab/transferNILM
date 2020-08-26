@@ -62,9 +62,14 @@ Directory tree:
 ├── Arguments.py
 ├── cnnModel.py
 ├── DataProvider.py
-├── data  (pan.baidu.com)
+├── data  (pan.baidu.com) 链接：https://pan.baidu.com/s/1VrWzCZgoYUoUsB5R7O02mw    提取码：tpy3
+│   ├── redd
+│   │   ├── low_freq
+│   │   │   ├── house_1~6
 │   ├── refit
 │   │   ├── CLEAN_REFIT_081116
+│   ├── ukdale
+│   │   ├── house_1~6
 ├── dataset_management
 │   ├── functions.py
 │   ├── redd

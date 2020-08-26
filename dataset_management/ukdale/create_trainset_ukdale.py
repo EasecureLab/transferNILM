@@ -3,10 +3,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import time
 import argparse
+import sys
+sys.path.append("../")
 from functions import load_dataframe
 
 
-DATA_DIRECTORY = '../../data/refit/UKDALE/'
+DATA_DIRECTORY = '../../data/ukdale/'
 SAVE_PATH = 'kettle/'
 AGG_MEAN = 522
 AGG_STD = 814
