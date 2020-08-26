@@ -62,7 +62,7 @@ def get_arguments():
                         type=remove_space,
                         default='kettle',
                         help='the name of target appliance')
-    parser.add_argument('--datadir',
+    parser.add_argument('--data_dir',
                         type=str,
                         default='/media/michele/Dati/myREFIT/',
                         help='this is the directory to the test data')
@@ -137,7 +137,7 @@ appliance_name = args.appliance_name
 log('Appliance target is: ' + appliance_name)
 
 # Looking for the selected test set
-for filename in os.listdir(args.datadir + appliance_name):
+for filename in os.listdir(args.data_dir + appliance_name):
         if args.test_type == 'train' and 'TRAIN' in filename.upper():
             test_filename = filename
             break
@@ -157,7 +157,7 @@ for filename in os.listdir(args.datadir + appliance_name):
 
 
 log('File for test: ' + test_filename)
-loadname_test = args.datadir + appliance_name + '/' + test_filename
+loadname_test = args.data_dir + appliance_name + '/' + test_filename
 log('Loading from: ' + loadname_test)
 
 # offset parameter from windowlenght

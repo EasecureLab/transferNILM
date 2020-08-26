@@ -59,7 +59,7 @@ def get_arguments():
                         type=remove_space,
                         default='kettle',
                         help='the name of target appliance')
-    parser.add_argument('--datadir',
+    parser.add_argument('--data_dir',
                         type=str,
                         default='/media/michele/Dati/myREFIT/',
                         help='this is the directory of the training samples')
@@ -140,17 +140,17 @@ sess = tf.InteractiveSession()
 appliance_name = args.appliance_name
 
 # path for training data
-training_path = args.datadir + appliance_name + '/' + appliance_name + '_training_' + '.csv'
+training_path = args.data_dir + appliance_name + '/' + appliance_name + '_training_' + '.csv'
 log('Training dataset: ' + training_path)
 
 # Looking for the validation set
-for filename in os.listdir(args.datadir + appliance_name):
+for filename in os.listdir(args.data_dir + appliance_name):
     if "validation" in filename:
         val_filename = filename
         log(val_filename)
 
 # path for validation data
-validation_path = args.datadir + appliance_name + '/' + val_filename
+validation_path = args.data_dir + appliance_name + '/' + val_filename
 log('Validation dataset: ' + validation_path)
 
 
